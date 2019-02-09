@@ -1,0 +1,17 @@
+{
+  "name": "drs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "pug-cli": "^1.0.0-alpha6",
+    "jstransformer-markdown-it": "^2.1.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "build": "rm -rf build && pug --out build --basedir . pages",
+    "build:watch": "npm run build -- -w"
+  },
+  "author": "",
+  "license": "ISC"
+}

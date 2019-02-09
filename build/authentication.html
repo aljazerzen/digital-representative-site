@@ -1,0 +1,93 @@
+<!DOCTYPE html  ><html lang="en"> <head><meta charset="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/><title>Digital Representative Server</title><link href="https://fonts.googleapis.com/css?family=Fira+Mono|Open+Sans" rel="stylesheet"/><style>body {
+	font-family: 'Open Sans', sans-serif;
+}
+
+h1, h2, h3, footer {
+	font-family: 'Fira Mono', monospace;
+}
+
+p {
+	line-height: 1.7;
+}
+
+nav {
+	margin: 0 -0.5rem;
+}
+
+nav a {
+	padding: 0.5rem;
+	margin: 0.5rem;
+	border-bottom: 2px solid black;
+	text-decoration: none;
+	color: black;
+}
+
+li {
+	margin: 0.375em auto
+}
+
+blockquote {
+	background: #ddd;
+	margin: 0;
+	padding: 1px 2em 1px 2em;
+}</style></head><body><div style="max-width: 48rem; margin: auto"><h1 style="font-size: 2.4rem">Digital Representative Server</h1><nav><a href="index.html">home</a><a href="motivation.html">motivation</a><a href="authentication.html">authentication</a></nav><br/><h1>Authentication</h1>
+<p>The goal for authentication mechanism is verifying identity of the user on the other side of secure connection.</p>
+<p>This protocol:</p>
+<ul>
+<li>would allow online systems to identify same user connecting over multiple connections (i.e. devices) at possibly different times</li>
+<li>would not allow authentication from one service to be used anywhere else</li>
+<li>would not provide any user identifying information without user consent</li>
+<li>would not allow different services to compare user identifiers to find matching users using both services</li>
+<li>would provide offline identity verification; ability of service server to verify user identity without contacting any other entity</li>
+<li>optional: would allow services to request and retrieve personal/company certificate</li>
+</ul>
+<h2>Proposal</h2>
+<p>Actors:</p>
+<ul>
+<li>DRS (digital representation server)</li>
+<li>user device</li>
+<li>service (the server of service user is using)</li>
+</ul>
+<p>Requirements:</p>
+<ul>
+<li>DRS must have static IP address</li>
+<li>DRS must have large number of users to ensure privacy (see below)</li>
+</ul>
+<p>Set up:</p>
+<ul>
+<li>establish or register at the DRS</li>
+<li>once for every device user owns DRS would generate a key and transfer it to the device (via any method, preferably QR code)</li>
+</ul>
+<p>Authentication process:</p>
+<ol>
+<li>user request a resource/action within of the service</li>
+<li>the service deternines that authentication is needed and requests identification from user device</li>
+<li>after user consent, user device requests service bound token from DRS</li>
+<li>DRS issues a SB token to the user device</li>
+<li>user device sends SB token and DRS IP address to the service</li>
+<li>the service sends SB token to DRS</li>
+<li>DRS authenticates SB token and returns TTL for the issued authentication</li>
+<li>service then grants authentication to the user for all their future requests until TTL of the autentication has passed.</li>
+<li>after that service has to request authentication again (using SB token)</li>
+</ol>
+<h3>Observations</h3>
+<ol>
+<li>SB tokens must be unique within DRS</li>
+<li>DRS can issue SB token to different services all within same namespace</li>
+<li>combination of SB token and DRS IP address is unique user indentfier service can use</li>
+<li>The security of the whole process is bound to the security of the SB token. If the service discloses its the SB tokens to a third-party only account at that particual service is at risk.</li>
+<li>Service can use any approach to link future user requests to the authentication process. Issuing a JWT token to user device is recommended.</li>
+<li>DRS can revoke user device key at any given moment, thus preventing it from requesting any new SB tokens from DRS.</li>
+<li>DRS can revoke any SB token, thus frozing corresponding service account in at most TTL time.</li>
+<li>If DRS has only few accounts at some service, this service could:
+<ul>
+<li>compare their user's DRS IP address with some other service and match user's accounts using both services thus tracking user accros the internet.</li>
+<li>detect that a user has duplicate accounts at the same service. This may be privacy concern is some cases.</li>
+</ul>
+</li>
+</ol>
+<h3>Possible improvements</h3>
+<h4>Negating effects of SB token leaks</h4>
+<p>Hashing the SB token at the service server as soon as the user device submits it as a form of indetification.</p>
+<p>This would almost negate security risks emposed by leak of hashed SB tokens and DRS IP address, since hashed SB tokens would not be useful to attackers in any way. Cracking the hashed SB tokens would also be harder that cracking passwords because dictionary attacks would have no significant effect on SB tokens.</p>
+<footer style="margin-top: 2rem; padding: 1rem 0; border-top: 1px solid black"><span>aljazerzen</span><span style="float: right">2019</span></footer></div></body></html>
