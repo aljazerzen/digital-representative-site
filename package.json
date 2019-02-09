@@ -9,7 +9,7 @@
   },
   "devDependencies": {},
   "scripts": {
-    "build": "rm -rf build && pug --out build --basedir . pages",
+    "build": "rm -rf docs && pug --out docs --basedir . pages",
     "build:watch": "npm run build -- -w"
   },
   "author": "",
