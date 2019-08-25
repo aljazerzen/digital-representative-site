@@ -30,14 +30,30 @@ blockquote {
 	background: #ddd;
 	margin: 0;
 	padding: 1px 2em 1px 2em;
-}</style></head><body><div style="max-width: 48rem; margin: auto"><h1 style="font-size: 2.4rem">Digital Representative Server</h1><nav><a href=".">home</a><a href="motivation.html">motivation</a><a href="authentication.html">authentication</a></nav><br/><p>Digital Representative Server is an idea of a protocol bundle, that would simplify architecture of most of the websites and online systems.</p>
-<p>Core proposal is a server that would represent an individual or a company in the digital world and interact with online system for them. It can be though as an email server, only that it could provide services such as:</p>
+}</style></head><body><div style="max-width: 48rem; margin: auto"><h1 style="font-size: 2.4rem">Digital Representative Server</h1><nav><a href=".">home</a><a href="abstraction.html">abstraction</a><a href="authentication.html">authentication</a></nav><br/><h2>Problem</h2>
+<blockquote>
+<p>Internet would benefit from distributed protocols for commonly used services.</p>
+</blockquote>
+<p>Examples of commonly used services:</p>
 <ul>
 <li>authentication</li>
-<li>communication (email, real-time messaging)</li>
-<li>payment gateway</li>
-<li>service/product browsing and ordering</li>
+<li>communication (email, instant messaging)</li>
+<li>payments</li>
+<li>product browsing and ordering (online shop)</li>
+<li>social media</li>
 </ul>
+<p>Current average implementation of commonly used services:</p>
+<ul>
+<li>lacks control over stored user data</li>
+<li>cannot interact with other implementations of the service</li>
+<li>has no standard format for specifying addresses, locations or other objects</li>
+<li>is difficult to transition to another service implementation</li>
+</ul>
+<p>Additionally, every implementation induces development and maintenance costs.</p>
+<h2>Solution</h2>
+<p><strong>Digital Representative Server</strong> is an idea of a protocol bundle, whose goal is to solve problems outlined above and simplify architecture of most websites and online services.</p>
+<p>Core proposal is a server that would represent an individual or a company in the digital world and interact with online services for them. It would be like an email server, only that it could provide multiple services.</p>
+<hr>
 <p>The whole concept is currently under development.</p>
 <p>If you would like to contribute, please open an issue at <a href="https://github.com/aljazerzen/digital-representative/issues">GitHub</a>, or send me an email to <a href="mailto://aljaz.erzen@gmail.com">aljaz.erzen@gmail.com</a></p>
 <footer style="margin-top: 2rem; padding: 1rem 0; border-top: 1px solid black"><span>aljazerzen</span><span style="float: right">2019</span></footer></div></body></html>
